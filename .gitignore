@@ -1,0 +1,7 @@
+jobs/
+__pycache__/
+site/backhaul.tar.gz
+train/data/
+train/venv/
+train/out/
+train/logs/
