@@ -1,0 +1,21 @@
+# Merged onto Harbor's base compose config: the market runs as a sidecar the agent reaches only through MCP.
+services:
+  main:
+    depends_on:
+      market:
+        condition: service_healthy
+
+  market:
+    build:
+      context: ./market
+    expose:
+      - "8000"
+    environment:
+      SEED: "${BACKHAUL_SEED:-}"
+      SCORE_TOKEN: "215687bf21d5c8e02e857f8b2da78203"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=2)"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+      start_period: 5s

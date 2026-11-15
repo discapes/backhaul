@@ -1,0 +1,32 @@
+schema_version = "1.4"
+
+[task]
+name = "backhaul/baltic-freight-season"
+description = "Run a forwarder's Baltic desk for a 10-week season of pay-as-bid freight space auctions."
+keywords = ["economics", "auctions", "planning", "mcp"]
+
+[metadata]
+difficulty = "hard"
+category = "economics"
+
+[agent]
+user = "agent"
+timeout_sec = 3600.0
+
+[verifier]
+user = "root"
+timeout_sec = 120.0
+
+[verifier.env]
+SCORE_TOKEN = "215687bf21d5c8e02e857f8b2da78203"
+
+[environment]
+build_timeout_sec = 900.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+
+[[environment.mcp_servers]]
+name = "backhaul"
+transport = "streamable-http"
+url = "http://market:8000/mcp"
